@@ -1,6 +1,5 @@
-# vue-pratice
+# a vue component ->  cus-avatar
 
-> practice
 
 ## Build Setup
 
