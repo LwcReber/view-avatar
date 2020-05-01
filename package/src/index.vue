@@ -1,12 +1,23 @@
 <template>
-  <div>
-    <div>{{avatarText}}</div>
-    <img :src="src" class="avatar">
+  <div :style="styleObj" class="avatar">
+    <slot>
+      <!-- 文字类型图片 -->
+      <div v-if="showText">
+        <slot name="text">{{avatarText}}</slot>
+      </div>
+      <!-- 图片类型 -->
+      <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
+      <!-- 图片显示错误的情况 -->
+      <div v-else class="error">
+        <slot name="imgError">?</slot>
+      </div>
+    </slot>
   </div>
 </template>
 
 <script>
   import MD5 from 'js-md5'
+  const DFColors = ['#567890', '#000000', '#00ffff', '#777777', '#666666']
   export default {
     name: 'cus-avatar',
     props: {
@@ -16,16 +27,80 @@
       },
       text: {
         type: String,
-        default: 'fsadfds'
+        default: ''
       },
-      mapColors: { // 
+      width: {
+        type: String,
+        default: '40px'
+      },
+      height: {
+        type: String,
+        default: '40px'
+      },
+      quickWidth: { // 尺寸宽度，设置宽高的快捷方式，
+        type: String,
+        default: ''
+      },
+      color: { // 默认颜色
+        type: String,
+        default: '#000'
+      },
+      colors: { // 生成的图片底色，随机颜色组
         type: Array,
         default: () => []
+      },
+      bgColor: { // 默认底图颜色
+        type: String,
+        default: '#eee'
+      },
+      borderRadius: { // 显示方式，设置为string的方式时，可以显示为圆形的方式，也可以设置关闭，默认有2px的border
+        type: [String, Boolean],
+        default: false
+      },
+      textImgError: { // 当图片显示错误时是否使用文字的方式显示图片，如不使用则默认用图片错误的方式处理
+        type: Boolean,
+        default: false
+      },
+      styles: {
+        type: Object,
+        default: () => {}
       }
     },
     watch: {
       text (newVal) {
         this.create(newVal)
+      }
+    },
+    computed: {
+      styleObj () {
+        let borderRadius = this.borderRadius ? { borderRadius: this.borderRadius } : {}
+        return {
+          width: this.quickWidth ? this.quickWidth : this.width,
+          height: this.quickWidth ? this.quickWidth :  this.height,
+          lineHeight: this.quickWidth ? this.quickWidth :  this.height,
+          color: this.color ? this.color : this.textColor,
+          backgroundColor: this.bgColor ? this.bgColor : this.cbgColor,
+          borderRadius: this.borderRadius ? this.borderRadius : '',
+          ...this.styles,
+        }
+      },
+      showText () {
+        if (this.textImgError) { // 当图片显示错误时使用文字的方式显示，此方式需要配合src使用
+          return true
+        }
+        if (!this.src && this.text) {
+          return true
+        }
+        return false
+      },
+      showImgError () {
+         if (!this.textImgError) {
+          return true
+        }
+        if (src && isImgError) {
+          return true
+        }
+        return false
       }
     },
     mounted () {
@@ -34,8 +109,9 @@
     data () {
       return {
         avatarText: '',
-        color: '',
-        bgColor: ''
+        textColor: '',
+        cbgColor: '',
+        isImgError: false
       }
     },
     methods: {
@@ -44,17 +120,36 @@
         str = str.trim()
         this.avatarText = reg.test(str) ? str.slice(0, 2) : str.slice(str.length - 2, str.length)
         let md5str = MD5(str)
-        console.log(this.avatarTextstr)
         let firstEle = isNaN(parseInt(md5str.slice(0, 1))) ? md5str.slice(0, 1).toLowerCase().charCodeAt() - 97 : md5str.slice(0, 1)
-        let mapColor = ((this.mapColors.length && this.mapColors) || ['#567890', '#000000', '#222222', '#777777', '#666666'])
+        let mapColor = ((this.colors.length && this.colors) || DFColors)
         let bgColors = {}
-        this.color = `${mapColor[firstEle % 5]}`
-        this.bgColor = bgColors[this.color]
+        this.textColor = `${mapColor[firstEle % 5]}`
+        this.cbgColor = bgColors[this.color]
+      },
+      // img显示错误时
+      imgError () {
+        console.log('error')
+        this.isImgError = true
+        this.$emit('imgErr')
       }
     }
   }
 </script>
 
 <style scoped>
-
+  .avatar {
+    display: inline-block;
+    text-align: center;
+    border-radius: 2px;
+    background-color: #eee;
+    overflow: hidden;
+  }
+  .error {
+    color: #ddd;
+  }
+  .image {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+  }
 </style>
