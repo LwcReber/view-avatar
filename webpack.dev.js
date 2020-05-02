@@ -19,7 +19,15 @@ module.exports = {
         use: [
           'vue-style-loader',
           'style-loader',
-          'css-loader'
+          'css-loader',
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader',
         ]
       },
       {
@@ -35,7 +43,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './example/index.js',
-    port: 8080,
+    port: 8081,
     hot: true
   }
 }

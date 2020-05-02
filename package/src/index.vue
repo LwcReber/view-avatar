@@ -1,25 +1,34 @@
 <template>
-  <div :style="styleObj" class="avatar">
-    <slot>
-      <!-- 文字类型图片 -->
-      <div v-if="showText">
-        <slot name="text">{{avatarText}}</slot>
-      </div>
-      <!-- 图片类型 -->
-      <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
-      <!-- 图片显示错误的情况 -->
-      <div v-else class="error">
-        <slot name="imgError">?</slot>
-      </div>
-    </slot>
-  </div>
+  <popper :disabled="!enablePopper" trigger="hover"
+    class="popper-wrap"
+    :options="popperOptionObj">
+    <span class="popper">tsdafds</span>
+    <div slot="reference" :style="styleObj" class="avatar">
+        <slot>
+          <!-- 文字类型图片 -->
+          <div v-if="showText">
+            <slot name="text">{{avatarText}}</slot>
+          </div>
+          <!-- 图片类型 -->
+          <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
+          <!-- 图片显示错误的情况 -->
+          <div v-else class="error">
+            <slot name="imgError">?</slot>
+          </div>
+        </slot>
+    </div>
+  </popper>
 </template>
 
 <script>
+  import Popper from 'vue-popperjs'
+  import 'vue-popperjs/dist/vue-popper.css'
+  console.log(Popper)
   import MD5 from 'js-md5'
   const DFColors = ['#567890', '#000000', '#00ffff', '#777777', '#666666']
   export default {
     name: 'cus-avatar',
+    components: { Popper },
     props: {
       src: {
         type: String,
@@ -64,6 +73,22 @@
       styles: {
         type: Object,
         default: () => {}
+      },
+      enablePopper: {
+        type: Boolean,
+        default: false
+      },
+      placement: {
+        type: String,
+        default: 'top'
+      },
+      popperOptions: {
+        type: Object,
+        default: () => {
+          return {
+            modifiers: { offset: { offset: '0, 5px' } }
+          }
+        }
       }
     },
     watch: {
@@ -101,6 +126,12 @@
           return true
         }
         return false
+      },
+      popperOptionObj () {
+        return {
+          placement: this.placement,
+          ...this.popperOptions
+        }
       }
     },
     mounted () {
@@ -136,7 +167,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .avatar {
     display: inline-block;
     text-align: center;
@@ -151,5 +182,31 @@
     width: 100%;
     height: 100%;
     vertical-align: top;
+  }
+  .popper {
+    background: #303133;
+    color: #fff;
+    border-color: transparent;
+  }
+
+</style>
+<style lang="less">
+  @bgColor:#303133;
+  .popper {
+    &[x-placement] .popper__arrow {
+      border-style: solid;
+    }
+    &[x-placement^="top"] .popper__arrow {
+      border-top-color: @bgColor;
+    }
+    &[x-placement^="right"] .popper__arrow {
+      border-right-color: @bgColor;
+    }
+    &[x-placement^="bottom"] .popper__arrow {
+      border-bottom-color: @bgColor;
+    }
+    &[x-placement^="left"] .popper__arrow {
+      border-left-color: @bgColor;
+    }
   }
 </style>

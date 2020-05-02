@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/LwcReber/cus-avatar#readme",
   "dependencies": {
-    "less": "^3.11.1",
     "vue": "^2.5.2",
+    "vue-popperjs": "^2.3.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -43,8 +43,11 @@
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.2.0",
     "js-md5": "^0.7.3",
+    "less": "^3.11.1",
+    "less-loader": "^6.0.0",
     "style-loader": "^1.2.0",
     "vue-loader": "^15.5.0",
+    "vue-popper": "^0.3.8",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0",
