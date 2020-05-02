@@ -4,18 +4,18 @@
     :options="popperOptionObj">
     <span class="popper">tsdafds</span>
     <div slot="reference" :style="styleObj" class="avatar">
-        <slot>
-          <!-- 文字类型图片 -->
-          <div v-if="showText">
-            <slot name="text">{{avatarText}}</slot>
-          </div>
-          <!-- 图片类型 -->
-          <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
-          <!-- 图片显示错误的情况 -->
-          <div v-else class="error">
-            <slot name="imgError">?</slot>
-          </div>
-        </slot>
+      <slot>
+        <!-- 文字类型图片 -->
+        <div v-if="showText">
+          <slot name="text">{{avatarText}}</slot>
+        </div>
+        <!-- 图片类型 -->
+        <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
+        <!-- 图片显示错误的情况 -->
+        <div v-if="showImgError" class="error">
+          <slot name="imgError">?</slot>
+        </div>
+      </slot>
     </div>
   </popper>
 </template>
@@ -23,7 +23,6 @@
 <script>
   import Popper from 'vue-popperjs'
   import 'vue-popperjs/dist/vue-popper.css'
-  console.log(Popper)
   import MD5 from 'js-md5'
   const DFColors = ['#567890', '#000000', '#00ffff', '#777777', '#666666']
   export default {
@@ -119,12 +118,15 @@
         return false
       },
       showImgError () {
-         if (!this.textImgError) {
-          return true
+        if (!this.src) {
+          return false
         }
-        if (src && isImgError) {
-          return true
+        if (this.textImgError) {
+          return false
         }
+        if (this.src && this.isImgError) {
+          return true
+        } 
         return false
       },
       popperOptionObj () {
@@ -187,6 +189,7 @@
     background: #303133;
     color: #fff;
     border-color: transparent;
+    box-shadow: none;
   }
 
 </style>
