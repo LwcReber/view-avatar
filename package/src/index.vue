@@ -2,7 +2,7 @@
   <popper :disabled="!enablePopper" trigger="hover"
     class="popper-wrap"
     :options="popperOptionObj">
-    <span class="popper">tsdafds</span>
+    <span class="popper">{{text}}</span>
     <div slot="reference" :style="styleObj" class="avatar">
       <slot>
         <!-- 文字类型图片 -->
@@ -24,7 +24,9 @@
   import Popper from 'vue-popperjs'
   import 'vue-popperjs/dist/vue-popper.css'
   import MD5 from 'js-md5'
-  const DFColors = ['#567890', '#000000', '#00ffff', '#777777', '#666666']
+  // 默认文字随机颜色组
+  const DFCOLORS = ['#409EFF', '#909399', '#F56C6C', '#000000', '#E6A23C']
+  const DFBGCOLORS = []
   export default {
     name: 'cus-avatar',
     components: { Popper },
@@ -51,7 +53,7 @@
       },
       color: { // 默认颜色
         type: String,
-        default: '#000'
+        default: ''
       },
       colors: { // 生成的图片底色，随机颜色组
         type: Array,
@@ -59,7 +61,11 @@
       },
       bgColor: { // 默认底图颜色
         type: String,
-        default: '#eee'
+        default: ''
+      },
+      bgColors: { // 底色随机颜色组， 与colors数组一一对应
+        type: Array,
+        default: () => []
       },
       borderRadius: { // 显示方式，设置为string的方式时，可以显示为圆形的方式，也可以设置关闭，默认有2px的border
         type: [String, Boolean],
@@ -120,7 +126,7 @@
       showImgError () {
         if (!this.src) {
           return false
-        }
+        }   
         if (this.textImgError) {
           return false
         }
@@ -154,10 +160,12 @@
         this.avatarText = reg.test(str) ? str.slice(0, 2) : str.slice(str.length - 2, str.length)
         let md5str = MD5(str)
         let firstEle = isNaN(parseInt(md5str.slice(0, 1))) ? md5str.slice(0, 1).toLowerCase().charCodeAt() - 97 : md5str.slice(0, 1)
-        let mapColor = ((this.colors.length && this.colors) || DFColors)
-        let bgColors = {}
-        this.textColor = `${mapColor[firstEle % 5]}`
-        this.cbgColor = bgColors[this.color]
+        let length = this.colors.length
+        let mapColor = ((length && this.colors) || DFCOLORS)
+        let bgColors = length && this.bgColors || DFBGCOLORS
+        let index = length ? (firstEle % length) : (firstEle % DFCOLORS.length)
+        this.textColor = mapColor[index] || '#000'
+        this.cbgColor = bgColors[index] || '#eee'
       },
       // img显示错误时
       imgError () {
