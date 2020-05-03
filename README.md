@@ -19,3 +19,6 @@ npm run build --report
 ```
 源码文件 /src/index
 打包后文件 /dist/index
+
+## LICENSE
+[MIT](https://github.com/LwcReber/cus-avatar/LICENSE)
