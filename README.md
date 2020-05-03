@@ -21,4 +21,4 @@ npm run build --report
 打包后文件 /dist/index
 
 ## LICENSE
-[MIT](https://github.com/LwcReber/cus-avatar/LICENSE)
+[MIT](https://github.com/LwcReber/cus-avatar/blob/master/LICENSE)
