@@ -2,7 +2,9 @@
   <popper :disabled="!enablePopper" trigger="hover"
     class="popper-wrap"
     :options="popperOptionObj">
-    <span class="popper">{{text}}</span>
+    <span class="popper">
+      <slot name="popper-text">{{text}}</slot>
+    </span>
     <div slot="reference" :style="styleObj" class="avatar">
       <slot>
         <!-- 文字类型图片 -->
@@ -28,7 +30,7 @@
   const DFCOLORS = ['#409EFF', '#909399', '#F56C6C', '#000000', '#E6A23C']
   const DFBGCOLORS = []
   export default {
-    name: 'cus-avatar',
+    name: 'view-avatar',
     components: { Popper },
     props: {
       src: {
@@ -55,7 +57,7 @@
         type: String,
         default: ''
       },
-      colors: { // 生成的图片底色，随机颜色组
+      colors: { // 生成的图片文字色，随机颜色组
         type: Array,
         default: () => []
       },

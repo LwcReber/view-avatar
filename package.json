@@ -1,7 +1,7 @@
 {
-  "name": "cus-avatar",
+  "name": "view-avatar",
   "version": "1.0.0",
-  "description": "can custom avatar",
+  "description": "a vue avatar component, avatar",
   "main": "dist/index",
   "scripts": {
     "dev": "webpack-dev-server --progress --info --config webpack.dev.js",
@@ -10,18 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LwcReber/cus-avatar.git"
+    "url": "git+https://github.com/LwcReber/view-avatar.git"
   },
   "keywords": [
     "avatar",
-    "vue-avatar"
+    "view-avatar"
   ],
   "author": "Reber",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LwcReber/cus-avatar/issues"
+    "url": "https://github.com/LwcReber/view-avatar/issues"
   },
-  "homepage": "https://github.com/LwcReber/cus-avatar#readme",
+  "homepage": "https://github.com/LwcReber/view-avatar#readme",
   "dependencies": {
     "vue": "^2.5.2",
     "vue-popperjs": "^2.3.0",
