@@ -117,7 +117,7 @@
         }
       },
       showText () {
-        if (this.textImgError) { // 当图片显示错误时使用文字的方式显示，此方式需要配合src使用
+        if (this.textImgError && this.isImgError) { // 当图片显示错误时使用文字的方式显示，此方式需要配合src使用
           return true
         }
         if (!this.src && this.text) {
