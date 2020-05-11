@@ -16,7 +16,7 @@
 
 
 
-1. 安装 `npm install --save view-avatar`
+1. 安装 `npm i -D view-avatar`
 
 
 
@@ -33,7 +33,9 @@
     </script>
   ```
 
+具体请运行  `npm run dev` 查看demo
 
+代码请看example文件夹
 
 
 
