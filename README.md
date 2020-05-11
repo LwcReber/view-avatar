@@ -60,8 +60,14 @@
 | popperOptions | popper的options属性（vue-popperjs）                          |               |        |        |
 
 
+####  slot
 
-
+|               |                          |
+| ------------- | ------------------------ |
+| —（默认方式） | 直接自定义图片           |
+| imgError      | 图片错误处理             |
+| text          | 文字自定义显示           |
+| popper-text   | 自定义显示tooltips的内容 |
 
 
 
