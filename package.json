@@ -1,6 +1,6 @@
 {
   "name": "view-avatar",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "a vue avatar component, avatar",
   "main": "dist/index",
   "scripts": {
