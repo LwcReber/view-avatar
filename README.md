@@ -16,7 +16,7 @@
 
 
 
-1. 安装 `npm i -D view-avatar`
+1. 安装 `npm i -S view-avatar`
 
 
 

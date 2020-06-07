@@ -1,20 +1,19 @@
 <template>
   <popper :disabled="!enablePopper" trigger="hover"
-    class="popper-wrap"
     :options="popperOptionObj">
-    <span class="popper">
+    <span class="vwa-popper">
       <slot name="popper-text">{{text}}</slot>
     </span>
-    <div slot="reference" :style="styleObj" class="avatar">
+    <div slot="reference" :style="styleObj" class="vwa-avatar">
       <slot>
         <!-- 文字类型图片 -->
         <div v-if="showText">
           <slot name="text">{{avatarText}}</slot>
         </div>
         <!-- 图片类型 -->
-        <img v-if="src && !isImgError" class="image" @error="imgError" :src="src">
+        <img v-else-if="src && !isImgError" class="vwa-image" @error="imgError" :src="src">
         <!-- 图片显示错误的情况 -->
-        <div v-if="showImgError" class="error">
+        <div v-if="showImgError" class="vwa-error">
           <slot name="imgError">?</slot>
         </div>
       </slot>
@@ -180,22 +179,21 @@
 </script>
 
 <style lang="less" scoped>
-  .avatar {
+  .vwa-avatar {
     display: inline-block;
     text-align: center;
     border-radius: 2px;
     background-color: #eee;
     overflow: hidden;
   }
-  .error {
+  .vwa-error {
     color: #ddd;
   }
-  .image {
+  .vwa-image {
     width: 100%;
     height: 100%;
-    vertical-align: top;
   }
-  .popper {
+  .vwa-popper {
     background: #303133;
     color: #fff;
     border-color: transparent;
@@ -205,7 +203,7 @@
 </style>
 <style lang="less">
   @bgColor:#303133;
-  .popper {
+  .vwa-popper {
     &[x-placement] .popper__arrow {
       border-style: solid;
     }
