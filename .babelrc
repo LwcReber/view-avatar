@@ -6,11 +6,16 @@
         "loose": true,
         "modules": false,
         "targets": {
+          "node": "6",
           "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
         }
       }
-    ],
-    "stage-2"
+    ]
   ],
+  "env": {
+    "test": {
+      "presets": [["env", { "targets": { "node": "current" } }]]
+    }
+  },
   "plugins": ["transform-vue-jsx"]
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --progress --info --config webpack.dev.js",
     "build": "webpack",
-    "test": "npm run lint &&  npm run test:unit"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,10 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^26.1.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^4.1.1",
@@ -43,10 +45,13 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.2.0",
+    "jest": "^26.1.0",
     "js-md5": "^0.7.3",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
+    "regenerator-runtime": "^0.13.5",
     "style-loader": "^1.2.0",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.5.0",
     "vue-popper": "^0.3.8",
     "vue-style-loader": "^3.0.1",
@@ -58,6 +63,16 @@
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
   },
   "browserslist": [
     "> 1%",
