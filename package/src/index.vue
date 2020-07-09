@@ -7,7 +7,7 @@
     <div slot="reference" :style="styleObj" class="vwa-avatar">
       <slot>
         <!-- 文字类型图片 -->
-        <div v-if="showText">
+        <div v-if="showText" class="vwa-text">
           <slot name="text">{{avatarText}}</slot>
         </div>
         <!-- 图片类型 -->
