@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --progress --info --config webpack.dev.js",
     "build": "webpack",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --coverage"
   },
   "repository": {
     "type": "git",

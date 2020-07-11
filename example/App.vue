@@ -8,8 +8,8 @@
     <p>背景颜色，文字颜色可以改动</p>
     <view-avatar bgColor="red" color="blue" text="前端"></view-avatar>
     <p>定义颜色组，根据文字md，自动使用不同颜色</p>
-    <view-avatar :bgColors="['blue', '#e19087']" :colors="['#fff', 'red']" text="我说大神"></view-avatar>
-    <view-avatar :bgColors="['blue', '#e19087']" :colors="['#fff', 'red']" text="厉害"></view-avatar>
+    <view-avatar :bgColors="['blue', '#E19087']" :colors="['#fff', 'red']" text="我说大神"></view-avatar>
+    <view-avatar :bgColors="['blue', '#E19087']" :colors="['#fff', 'red']" text="厉害"></view-avatar>
 
     <h3>带poppver提示信息</h3>
     <view-avatar enablePopper text="蜜蜂噶水淀粉"></view-avatar>
@@ -31,6 +31,10 @@
         图片出现错误时，自动变成文字显示
         <view-avatar src="https://xxxx.png" textImgError text="错误"></view-avatar>
       </li>
+      <view-avatar src="https://xxxx.png">
+        <span name="imgError">aaa</span>
+      </view-avatar>
+
     </ul>
 
     <h3>没有文字，图片的，直接写slot显示</h3>
